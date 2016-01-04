@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/kotlin-runtime.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/kotlin-reflect.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/miglayout-4.0-swing.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
