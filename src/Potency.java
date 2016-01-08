@@ -21,7 +21,7 @@ public class Potency extends JFrame {
     private JPanel errorPanel;
     private JComboBox comboType;
     private JSlider wristCircuit;
-    private JComboBox comboSex;
+    //private JComboBox comboSex;
     private JButton wristResult;
 
     public Potency() {
@@ -53,25 +53,34 @@ public class Potency extends JFrame {
         comboType.addItem("Mezomorfik");
         comboType.addItem("Endomorfik");
 
-        comboSex.addItem("");
-        comboSex.addItem("Mężczyzna");
-        comboSex.addItem("Kobieta");
+        //comboSex.addItem("");
+        //comboSex.addItem("Mężczyzna");
+        //comboSex.addItem("Kobieta");
 
         Vector res = new Vector();
         res = this.getAnswers();
+
+        goButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ResultForm resform = new ResultForm();
+                dispose();
+            }
+        });
+
     }
 
     public Vector getAnswers() {
-        Vector vector = new Vector();
+        Vector answers = new Vector();
 
-        comboSex.addActionListener(new ActionListener() {
+        /*comboSex.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String sexAnswer = (String)comboSex.getSelectedItem();
                 int s = comboSex.getSelectedIndex();
                 //System.out.println(s);
             }
-        });
+        });*/
 
         wristCircuit.addChangeListener(new ChangeListener() {
             @Override
@@ -88,7 +97,7 @@ public class Potency extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String ageAnswer = (String)comboAge.getSelectedItem();
-                int s = comboSex.getSelectedIndex();
+                int s = comboAge.getSelectedIndex();
                 //System.out.println(s);
             }
         });
@@ -97,7 +106,7 @@ public class Potency extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String trainingAnswer = (String)comboTraining.getSelectedItem();
-                int s = comboSex.getSelectedIndex();
+                int s = comboTraining.getSelectedIndex();
                 //System.out.println(s);
             }
         });
@@ -106,11 +115,13 @@ public class Potency extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String typeAnswer = (String)comboType.getSelectedItem();
-                int s = comboSex.getSelectedIndex();
+                int s = comboType.getSelectedIndex();
                 //System.out.println(s);
             }
         });
 
-        return vector;
+
+
+        return answers;
     }
 }
