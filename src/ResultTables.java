@@ -6,7 +6,9 @@ import java.util.Map;
  */
 public class ResultTables {
 
-    private Map[][] tables = new Map[4][4];
+
+
+    private HashMap[][] tables = new HashMap[4][4];
 
 
     public ResultTables() {
@@ -96,4 +98,10 @@ public class ResultTables {
         }
         return str;
     }
+
+    public HashMap getMap(int r, int c) {
+        return tables[r][c];
+    }
+
+
 }

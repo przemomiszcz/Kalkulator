@@ -17,20 +17,21 @@ public class Potency extends JFrame {
     private JComboBox comboAge;
     private JComboBox comboTraining;
     private JButton goButton;
-    private JLabel errorLabel;
-    private JPanel errorPanel;
     private JComboBox comboType;
     private JSlider wristCircuit;
-    //private JComboBox comboSex;
     private JButton wristResult;
+    private Vector answers;
 
     public Potency() {
         super("Witam w mojej aplikacji!");
         setSize(new Dimension(500 , 500));
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setContentPane(panelik);
-        errorPanel.setVisible(false);
         setVisible(true);
+        this.answers = new Vector();
+        for(int i = 0; i < 4; i++) {
+            answers.add(0);
+        }
         this.addFunctionality();
     }
 
@@ -57,21 +58,34 @@ public class Potency extends JFrame {
         //comboSex.addItem("Mężczyzna");
         //comboSex.addItem("Kobieta");
 
-        Vector res = new Vector();
-        res = this.getAnswers();
+        //Vector res = new Vector();
+        answers = this.getAnswers();
+        //System.out.print(answers);
 
         goButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ResultForm resform = new ResultForm();
-                dispose();
+                if(comboAge.getSelectedIndex() == 0 || comboTraining.getSelectedIndex() == 0 ||
+                        comboType.getSelectedIndex() == 0) {
+                    //errorPanel.setVisible(true);
+                    JOptionPane.showMessageDialog(new JFrame(), "Wypełnij wszystkie pola!", "Błąd!", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    Integer s = wristCircuit.getValue();
+                    //Integer d = (Integer)s;
+                    String str = s.toString();
+                    wristResult.setText(str);
+                    answers.insertElementAt(s, 3);
+                    System.out.print(answers);
+                    ResultForm resform = new ResultForm(answers);
+                    dispose();
+                }
             }
         });
 
     }
 
     public Vector getAnswers() {
-        Vector answers = new Vector();
+        //Vector answers = new Vector();
 
         /*comboSex.addActionListener(new ActionListener() {
             @Override
@@ -85,10 +99,12 @@ public class Potency extends JFrame {
         wristCircuit.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                Integer s = wristCircuit.getValue();
-                System.out.println(s);
-                String str = s.toString();
+                int s = wristCircuit.getValue();
+                //System.out.println(s);
+                Integer i = (Integer) s;
+                String str = i.toString();
                 wristResult.setText(str);
+                //answers.add(s);
             }
         });
 
@@ -99,6 +115,7 @@ public class Potency extends JFrame {
                 String ageAnswer = (String)comboAge.getSelectedItem();
                 int s = comboAge.getSelectedIndex();
                 //System.out.println(s);
+                answers.add(s);
             }
         });
 
@@ -108,6 +125,7 @@ public class Potency extends JFrame {
                 String trainingAnswer = (String)comboTraining.getSelectedItem();
                 int s = comboTraining.getSelectedIndex();
                 //System.out.println(s);
+                answers.add(s);
             }
         });
 
@@ -117,11 +135,12 @@ public class Potency extends JFrame {
                 String typeAnswer = (String)comboType.getSelectedItem();
                 int s = comboType.getSelectedIndex();
                 //System.out.println(s);
+                answers.add(s);
             }
         });
 
 
-
+        //System.out.print(answers);
         return answers;
     }
 }
