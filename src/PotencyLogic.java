@@ -16,7 +16,7 @@ public class PotencyLogic {
     public PotencyLogic(Vector answers, ResultForm form) {
         this.answers = answers;
         this.form = form;
-        this.rt = new ResultTables();
+        this.rt = new ResultTables("potency");
     }
 
 
@@ -35,7 +35,7 @@ public class PotencyLogic {
     }
 
     public void chooseGain() {
-        double result = 0;
+        double result = 0.0;
         String resultStr;
         String ageStr = answers.elementAt(0).toString();
         int age = Integer.parseInt(ageStr);
@@ -44,16 +44,18 @@ public class PotencyLogic {
         String typeStr = answers.elementAt(2).toString();
         int type = Integer.parseInt(typeStr);
 
-        HashMap hm = rt.getMap(training-1, age-1);
+        HashMap hm = rt.getPotencyMap(training-1, age-1);
         if(type == 1) {
             resultStr = hm.get("ekto").toString();
             result = parseDouble(resultStr);
             form.setResultField(result);
-        } else if( type == 2) {
+        }
+        if( type == 2) {
             resultStr = hm.get("mezo").toString();
             result = parseDouble(resultStr);
             form.setResultField(result);
-        } else if(type == 3) {
+        }
+        if(type == 3) {
             resultStr = hm.get("endo").toString();
             result = parseDouble(resultStr);
             form.setResultField(result);

@@ -21,6 +21,7 @@ public class Potency extends JFrame {
     private JSlider wristCircuit;
     private JButton wristResult;
     private Vector answers;
+    private int[] tmpTable = new int[4];
 
     public Potency() {
         super("Witam w mojej aplikacji!");
@@ -29,9 +30,6 @@ public class Potency extends JFrame {
         setContentPane(panelik);
         setVisible(true);
         this.answers = new Vector();
-        for(int i = 0; i < 4; i++) {
-            answers.add(0);
-        }
         this.addFunctionality();
     }
 
@@ -59,9 +57,9 @@ public class Potency extends JFrame {
         //comboSex.addItem("Kobieta");
 
         //Vector res = new Vector();
-        answers = this.getAnswers();
+        //answers = this.getAnswers();
         //System.out.print(answers);
-
+        this.getAnswers();
         goButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,11 +68,9 @@ public class Potency extends JFrame {
                     //errorPanel.setVisible(true);
                     JOptionPane.showMessageDialog(new JFrame(), "Wypełnij wszystkie pola!", "Błąd!", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    Integer s = wristCircuit.getValue();
-                    //Integer d = (Integer)s;
-                    String str = s.toString();
-                    wristResult.setText(str);
-                    answers.insertElementAt(s, 3);
+                    for(int i = 0; i < 4; i++) {
+                        answers.add(tmpTable[i]);
+                    }
                     System.out.print(answers);
                     ResultForm resform = new ResultForm(answers);
                     dispose();
@@ -84,7 +80,7 @@ public class Potency extends JFrame {
 
     }
 
-    public Vector getAnswers() {
+    public void getAnswers() {
         //Vector answers = new Vector();
 
         /*comboSex.addActionListener(new ActionListener() {
@@ -104,7 +100,7 @@ public class Potency extends JFrame {
                 Integer i = (Integer) s;
                 String str = i.toString();
                 wristResult.setText(str);
-                //answers.add(s);
+                tmpTable[3] = s;
             }
         });
 
@@ -112,35 +108,35 @@ public class Potency extends JFrame {
         comboAge.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String ageAnswer = (String)comboAge.getSelectedItem();
+                //String ageAnswer = (String)comboAge.getSelectedItem();
                 int s = comboAge.getSelectedIndex();
                 //System.out.println(s);
-                answers.add(s);
+                //answers.add(s);
+                tmpTable[0] = s;
             }
         });
 
         comboTraining.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String trainingAnswer = (String)comboTraining.getSelectedItem();
+                //String trainingAnswer = (String)comboTraining.getSelectedItem();
                 int s = comboTraining.getSelectedIndex();
                 //System.out.println(s);
-                answers.add(s);
+                //answers.add(s);
+                tmpTable[1] = s;
             }
         });
 
         comboType.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String typeAnswer = (String)comboType.getSelectedItem();
+                //String typeAnswer = (String)comboType.getSelectedItem();
                 int s = comboType.getSelectedIndex();
                 //System.out.println(s);
-                answers.add(s);
+                //answers.add(s);
+                tmpTable[2] = s;
             }
         });
 
-
-        //System.out.print(answers);
-        return answers;
     }
 }

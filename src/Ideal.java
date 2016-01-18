@@ -2,29 +2,128 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 /**
  * Created by Dante on 04.01.2016.
  */
 public class Ideal extends JFrame{
-    private JButton button1;
-    private JPanel panel1;
+    private JButton goButton;
+    private JPanel panelik;
+    private JComboBox comboType;
+    private JComboBox comboSex;
+    private JTextField heightField;
+    private JTextField weightField;
+    private Vector answers;
+    private int[] tmpTable = new int[4];
 
     public Ideal() {
         super("some");
         //pack();
         setSize(new Dimension(500 , 500));
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setContentPane(panel1);
+        setContentPane(panelik);
+        setVisible(true);
+        this.answers = new Vector();
+        this.addFunctionality();
+    }
 
-        button1.addActionListener(new ActionListener() {
+    public void addFunctionality() {
+        comboSex.addItem("");
+        comboSex.addItem("Mężczyzna");
+        comboSex.addItem("Kobieta");
+
+        comboType.addItem("");
+        comboType.addItem("Ektomorfik");
+        comboType.addItem("Mezomorfik");
+        comboType.addItem("Endomorfik");
+
+        this.getAnswers();
+        goButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String weight = weightField.getText();
+                String height = heightField.getText();
+                if(!ifNumber(weight) || !ifNumber(height)) {
+                    JOptionPane.showMessageDialog(new JFrame(), "Wpisz cyfry!", "Błąd!", JOptionPane.ERROR_MESSAGE);
+                }
+                if(heightField.getText().equals("") || weightField.getText().equals("") ||
+                        comboSex.getSelectedIndex() == 0 || comboType.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(new JFrame(), "Wypełnij wszystkie pola!", "Błąd!", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    String heightAnswer = heightField.getText();
+                    System.out.print(heightAnswer);
+                    int s = Integer.parseInt(heightAnswer);
+                    tmpTable[0] = s;
 
-                Ideal ideal = new Ideal();
+                    String weightAnswer = weightField.getText();
+                    int d = Integer.parseInt(weightAnswer);
+                    tmpTable[1] = d;
+
+                    for(int i = 0; i < 4; i++) {
+                        answers.add(tmpTable[i]);
+                    }
+                    System.out.println(answers);
+
+                    if(comboSex.getSelectedIndex() == 1) {
+                        ManResult mr = new ManResult(answers);
+                        dispose();
+                    }
+                    if (comboSex.getSelectedIndex() == 2) {
+                        WomanResult wr = new WomanResult();
+                        dispose();
+                    }
+                }
             }
-
         });
-        setVisible(true);
+
+    }
+
+    public boolean ifNumber(String toCheck) {
+        boolean result = true;
+        for(int i = 0; i <toCheck.length(); i++) {
+            if((int)toCheck.charAt(i) < 48 || (int)toCheck.charAt(i) > 57) {
+                result = false;
+            }
+        }
+
+        return result;
+    }
+
+    public void getAnswers() {
+
+        /*heightField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String heightAnswer = heightField.getText();
+                System.out.print(heightAnswer);
+                int s = Integer.parseInt(heightAnswer);
+                tmpTable[0] = s;
+            }
+        });
+
+        weightField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //System.out.println("sfsfdsgsgsd");
+                String weightAnswer = weightField.getText();
+                int s = Integer.parseInt(weightAnswer);
+                tmpTable[1] = s;
+            }
+        });*/
+
+        comboType.addActionListener(e -> {
+            int s = comboType.getSelectedIndex();
+            tmpTable[2] = s;
+        });
+
+        comboSex.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int s = comboSex.getSelectedIndex();
+                tmpTable[3] = s;
+            }
+        });
+
     }
 }
