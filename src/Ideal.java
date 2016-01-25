@@ -18,8 +18,7 @@ public class Ideal extends JFrame{
     private int[] tmpTable = new int[4];
 
     public Ideal() {
-        super("some");
-        //pack();
+        super("Obliczanie idealnych wymiarów");
         setSize(new Dimension(500 , 500));
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setContentPane(panelik);
@@ -44,15 +43,14 @@ public class Ideal extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String weight = weightField.getText();
                 String height = heightField.getText();
+
                 if(!ifNumber(weight) || !ifNumber(height)) {
                     JOptionPane.showMessageDialog(new JFrame(), "Wpisz cyfry!", "Błąd!", JOptionPane.ERROR_MESSAGE);
-                }
-                if(heightField.getText().equals("") || weightField.getText().equals("") ||
+                } else if(heightField.getText().equals("") || weightField.getText().equals("") ||
                         comboSex.getSelectedIndex() == 0 || comboType.getSelectedIndex() == 0) {
                     JOptionPane.showMessageDialog(new JFrame(), "Wypełnij wszystkie pola!", "Błąd!", JOptionPane.ERROR_MESSAGE);
                 } else {
                     String heightAnswer = heightField.getText();
-                    System.out.print(heightAnswer);
                     int s = Integer.parseInt(heightAnswer);
                     tmpTable[0] = s;
 
@@ -70,8 +68,13 @@ public class Ideal extends JFrame{
                         dispose();
                     }
                     if (comboSex.getSelectedIndex() == 2) {
-                        WomanResult wr = new WomanResult();
-                        dispose();
+                        if(Integer.parseInt(height) > 178 || Integer.parseInt(height) < 156) {
+                            JOptionPane.showMessageDialog(new JFrame(), "Podaj wzrost w dopuszczalnym zakresie(156-178)", "Błąd", JOptionPane.ERROR_MESSAGE);
+                            answers.clear();
+                        } else {
+                            WomanResult wr = new WomanResult(answers);
+                            dispose();
+                        }
                     }
                 }
             }
@@ -91,26 +94,6 @@ public class Ideal extends JFrame{
     }
 
     public void getAnswers() {
-
-        /*heightField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String heightAnswer = heightField.getText();
-                System.out.print(heightAnswer);
-                int s = Integer.parseInt(heightAnswer);
-                tmpTable[0] = s;
-            }
-        });
-
-        weightField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //System.out.println("sfsfdsgsgsd");
-                String weightAnswer = weightField.getText();
-                int s = Integer.parseInt(weightAnswer);
-                tmpTable[1] = s;
-            }
-        });*/
 
         comboType.addActionListener(e -> {
             int s = comboType.getSelectedIndex();

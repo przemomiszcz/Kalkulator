@@ -21,7 +21,7 @@
           <editable value="false"/>
           <font style="1"/>
           <horizontalAlignment value="0"/>
-          <text value="Szacunkowy roczny potencjał wzrostu Twojej masy mięśniowej:"/>
+          <text value="Szacunkowy roczny potencjał wzrostu Twojej masy mięśniowej[kg]:"/>
         </properties>
       </component>
       <component id="9a03" class="javax.swing.JTextField" binding="resultField">

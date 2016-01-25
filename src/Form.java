@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
  * Created by Dante on 04.01.2016.
  */
 public class Form extends JFrame{
-    private JButton button2;
     private JPanel rootPanel;
     private JButton potency;
     private JButton ideal;

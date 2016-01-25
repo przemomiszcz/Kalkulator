@@ -21,16 +21,14 @@ public class ResultForm extends JFrame {
 
 
     public ResultForm(Vector answers) {
-        super("Witam w mojej aplikacji!");
+        super("Zobacz jakie są Twoje możliwości");
         PotencyLogic pl = new PotencyLogic(answers, this);
         pl.countCircuits();
         pl.chooseGain();
-        //infoPane1.setContentType("Szacunkowy roczny potencjał wzrostu masy mięśniowej w zależności od wieku, stażu treningowego oraz typu budowy ciała");
         setSize(new Dimension(500, 500));
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setContentPane(resultPanel);
         setVisible(true);
-        //resultField.setText("Tu wpisze ile kilogramow" + "kg");
     }
 
     private void createUIComponents() {

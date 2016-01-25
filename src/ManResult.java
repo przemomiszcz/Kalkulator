@@ -18,16 +18,14 @@ public class ManResult extends JFrame{
     Double[] answer = new Double[8];
 
     public ManResult(Vector answers) {
-        super("Witam w mojej aplikacji!");
+        super("Stary, tak powinieneś wyglądać");
         IdealLogic il = new IdealLogic(answers, this);
-        //il.countMenIdeal();
-        answer = il.returnData();
+        answer = il.returnManData();
         setSize(new Dimension(500, 500));
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setContentPane(manPanel);
         setVisible(true);
         setAnswers();
-        //resultField.setText("Tu wpisze ile kilogramow" + "kg");
     }
 
     public void setAnswers() {
